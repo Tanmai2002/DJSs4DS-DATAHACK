@@ -4,6 +4,7 @@ import streamlit as st
 import pandas as pd
 import Database.dbConnection as dbConnection
 import datetime
+import plotly.express as px
 from pandas.api.types import is_numeric_dtype
 def onSelectChange(option):
     # st.write(option)
@@ -35,6 +36,11 @@ def barChart(data,x,y):
     
     if(is_numeric_dtype(data[y]) and x):
         st.bar_chart(data,x=x,y=y)
+def pie_Chart(data,x,y):
+    if(type(data[x][0])==datetime.date or type(data[y][0])==datetime.date):
+        return
+    fig = px.pie(data, values=x, names=y)
+    st.plotly_chart(fig)
 run_query=dbConnection.run_query
 current_data_col=[]
 rows = run_query('SELECT * FROM "BANKING"."DATASETS"')
@@ -74,3 +80,4 @@ if(type(op[option1][0])==datetime.date):
     op=op[(op[option1]>=values[0]) & (op[option1]<=values[1])]
 
 lineChart(op,option1,option2)
+pie_Chart(op,option1,option2)
