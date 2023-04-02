@@ -50,7 +50,7 @@ import datetime
 sDate : datetime.datetime=min(cmpy_df[op]['Date'])
 eDate:datetime.datetime=max(cmpy_df[op]['Date'])
 
-date_range = st.slider("Select Date Range:", sDate.date(),eDate.date(),(sDate.date(),eDate.date()))
+date_range = st.slider("Select Date Range:", sDate,eDate,(sDate,eDate))
 
 df=cmpy_df[op]
 df=df[(df['Date']>=date_range[0]) &(df['Date']<=date_range[1])]
