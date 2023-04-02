@@ -11,7 +11,7 @@ list_of_companies=[]
 @st.cache_resource
 def loadData(): 
  global list_of_companies
- df2=pd.read_csv('app/pages/archive 2/NIFTY50_all.csv')
+ df2=pd.read_csv('pages/archive 2/NIFTY50_all.csv')
 
  list_of_companies=df2['Symbol'].unique()
   
@@ -48,12 +48,12 @@ with col2:
 import datetime
 
 sDate : datetime.datetime=min(cmpy_df[op]['Date'])
-eDate:datetime.datetime=max(cmpy_df[op]['Date'])
+eDate : datetime.datetime=max(cmpy_df[op]['Date'])
 
-date_range = st.slider("Select Date Range:", sDate,eDate,(sDate,eDate))
+date_range = st.slider("Select Date Range:", sDate.date(),eDate.date(),(sDate.date(),eDate.date()))
 
 df=cmpy_df[op]
-df=df[(df['Date']>=date_range[0]) &(df['Date']<=date_range[1])]
+df=df[(df['Date'].dt.date>=date_range[0]) &(df['Date'].dt.date<=date_range[1])]
 
 st.line_chart(df,x='Date',y=op2)
 
