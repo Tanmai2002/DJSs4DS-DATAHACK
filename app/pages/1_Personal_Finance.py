@@ -42,10 +42,12 @@ if len(op_data)>0:
 
  op_data = op_data[(op_data["Amount"] >= amount_range[0]) & (op_data["Amount"] <= amount_range[1])]
 fig = px.pie(op_data, values='Amount', names='Category', title='Values by Category')
-
-st.plotly_chart(fig)
-
-st.write(op_data[::-1])
+col1,col2=st.columns(2)
+with col1:
+        st.plotly_chart(fig,use_container_width=True)
+    
+with col2:
+    st.write(op_data[::-1])
 
 
 
