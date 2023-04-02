@@ -3,7 +3,7 @@ st.write("# Personal Finance")
 import pandas as pd
 import os.path
 import numpy as np
-
+import plotly.express as px
 path = 'budget.csv'
 
 check_file = os.path.isfile(path)
@@ -12,20 +12,20 @@ budget_data=pd.DataFrame(columns=["Name","Amount", "Category"])
 if check_file:
  budget_data = pd.read_csv("budget.csv")
 
-
-
-# Add new transaction
-st.header("Add New Transaction")
-transaction_name = st.text_input("Enter transaction name:")
-transaction_amount = st.number_input("Enter transaction amount:")
-transaction_category = st.selectbox("Select transaction category:", 
-                                   ["Housing", "Transportation", "Food", "Utilities", "Entertainment", "Other"])
-if st.button("Add"):
-    new_row = {"Name": transaction_name, "Amount": transaction_amount, "Category": transaction_category}
-    budget_data = budget_data.append(new_row, ignore_index=True)
-    budget_data.to_csv("budget.csv", index=False)
-    st.success("Transaction added successfully!")
-    
+ct1,ct2=st.columns(2)
+with ct1:
+   
+    st.header("Add New Transaction")
+    transaction_name = st.text_input("Enter transaction name:")
+    transaction_amount = st.number_input("Enter transaction amount:")
+    transaction_category = st.selectbox("Select transaction category:", 
+                                    ["Housing", "Transportation", "Food", "Utilities", "Entertainment", "Other"])
+    if st.button("Add"):
+        new_row = {"Name": transaction_name, "Amount": transaction_amount, "Category": transaction_category}
+        budget_data = budget_data.append(new_row, ignore_index=True)
+        budget_data.to_csv("budget.csv", index=False)
+        st.success("Transaction added successfully!")
+        
 # View transactions by category
 st.header("View Transactions")
 category = st.selectbox("Select category:", ["All"] + list(budget_data["Category"].unique()))
@@ -41,7 +41,11 @@ if len(op_data)>0:
  amount_range = st.slider("Select amount range:", min_amount, max_amount,(min_amount-1,max_amount))
 
  op_data = op_data[(op_data["Amount"] >= amount_range[0]) & (op_data["Amount"] <= amount_range[1])]
- st.write(op_data)
+fig = px.pie(op_data, values='Amount', names='Category', title='Values by Category')
+
+st.plotly_chart(fig)
+
+st.write(op_data[::-1])
 
 
 
