@@ -52,7 +52,10 @@ eDate:datetime.datetime=max(cmpy_df[op]['Date'])
 
 date_range = st.slider("Select Date Range:", sDate.date(),eDate.date(),(sDate.date(),eDate.date()))
 
-st.line_chart(cmpy_df[op],x='Date',y=op2)
+df=cmpy_df[op]
+df=df[(df['Date']>=sDate) &(df['Date']<=eDate)]
+
+st.line_chart(df,x='Date',y=op2)
 
 # plt.plot(cmpy_df[op]['Close'])
 # plt.ylabel('Close')

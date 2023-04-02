@@ -6,6 +6,7 @@ import Database.dbConnection as dbConnection
 import datetime
 import plotly.express as px
 from pandas.api.types import is_numeric_dtype
+
 def onSelectChange(option):
     # st.write(option)
     global op,current_data_col
