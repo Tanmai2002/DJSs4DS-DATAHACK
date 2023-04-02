@@ -70,8 +70,8 @@ training_data_len = int(np.ceil( len(dataset) * .9 ))
 days=30
 
 
-model = pickle.load(open(f'pages/trainedModel/{compName}_model.sav', 'rb'))
-scaler = pickle.load(open(f'pages/trainedModel/{compName}_scaler.sav', 'rb'))
+model = pickle.load(open(f'app/pages/trainedModel/{compName}_model.sav', 'rb'))
+scaler = pickle.load(open(f'app/pages/trainedModel/{compName}_scaler.sav', 'rb'))
 
 scaled_data = scaler.fit_transform(dataset)
 
