@@ -11,7 +11,7 @@ list_of_companies=[]
 @st.cache_resource
 def loadData(): 
  global list_of_companies
- df2=pd.read_csv('/Users/muskaansharma/Desktop/ZcodersDatahack/app/pages/archive 2/NIFTY50_all.csv')
+ df2=pd.read_csv('pages/archive 2/NIFTY50_all.csv')
 
  list_of_companies=df2['Symbol'].unique()
   

@@ -39,7 +39,7 @@ def barChart(data,x,y):
 def pie_Chart(data,x,y):
     if(type(data[x][0])==datetime.date or type(data[y][0])==datetime.date):
         return
-    fig = px.pie(data, values=x, names=y)
+    fig = px.pie(data, values=y, names=x)
     st.plotly_chart(fig)
 run_query=dbConnection.run_query
 current_data_col=[]
