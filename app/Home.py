@@ -6,9 +6,8 @@ import plotly.express as px
 path = 'budget.csv'
 
 st.cache_resource
-def load_once():
-    st.set_page_config(
-    page_title="Personal Finance",
+st.set_page_config(
+    page_title="Wealth wise",
     page_icon="💰",
 )
 check_file = os.path.isfile(path)
