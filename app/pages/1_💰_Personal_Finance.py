@@ -25,7 +25,8 @@ with ct1:
         budget_data = budget_data.append(new_row, ignore_index=True)
         budget_data.to_csv("budget.csv", index=False)
         st.success("Transaction added successfully!")
-        
+with ct2:
+    px.line(budget_data,x=budget_data.index,y='Amount')        
 # View transactions by category
 st.header("View Transactions")
 category = st.selectbox("Select category:", ["All"] + list(budget_data["Category"].unique()))
@@ -92,7 +93,6 @@ def calculate_tax_reductions(income, deductions, is_new_regime):
     print("Tax reductions under old regime: INR %.2f" % old_tax_reduction)
     print("Tax reductions under new regime: INR %.2f" % new_tax_reduction)
 
-st.number_input("Enter gross salary",value=0)
 
 
 
