@@ -53,7 +53,6 @@ eDate:datetime.datetime=max(cmpy_df[op]['Date'])
 date_range = st.slider("Select Date Range:", sDate.date(),eDate.date(),(sDate.date(),eDate.date()))
 
 st.line_chart(cmpy_df[op],x='Date',y=op2)
-st.write(cmpy_df[op])
 
 # plt.plot(cmpy_df[op]['Close'])
 # plt.ylabel('Close')
@@ -120,5 +119,7 @@ today=df['Close'].values[-1]
 tommorrow=round(valid['Predictions'].values[-1],2)
 col1.metric("Today", today,f"{round(df['Daily Return'].values[-1],2)}%")
 col2.metric("Expected Tomorrow", tommorrow, f"{tommorrow-today}")
+st.header("Historical Data")
+st.write(cmpy_df[op][::-1])
 
 

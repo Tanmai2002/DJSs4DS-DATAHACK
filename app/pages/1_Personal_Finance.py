@@ -30,11 +30,7 @@ with ct1:
 st.header("View Transactions")
 category = st.selectbox("Select category:", ["All"] + list(budget_data["Category"].unique()))
 op_data=budget_data
-if category == "All":
-    pass
-else:
-    op_data= budget_data[budget_data["Category"] == category]
-    
+
 if len(op_data)>0:
  max_amount = float(np.max(op_data["Amount"]))
  min_amount = float(np.min(op_data["Amount"]))
@@ -42,6 +38,11 @@ if len(op_data)>0:
 
  op_data = op_data[(op_data["Amount"] >= amount_range[0]) & (op_data["Amount"] <= amount_range[1])]
 fig = px.pie(op_data, values='Amount', names='Category', title='Values by Category')
+if category == "All":
+    pass
+else:
+    op_data= budget_data[budget_data["Category"] == category]
+    
 col1,col2=st.columns(2)
 with col1:
         st.plotly_chart(fig,use_container_width=True)
